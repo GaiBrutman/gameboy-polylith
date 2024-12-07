@@ -36,15 +36,14 @@ int main(void)
     }
 
     ui_screen__init(&screen);
-    bool run_succeeded = game__run(&sg_games[game_choice - 1], &screen);
-    ui_screen__destroy(&screen);
-
-    if (!run_succeeded)
+    if (!game__run(&sg_games[game_choice - 1], &screen))
     {
+        ui_screen__destroy(&screen);
         printf("Failed to run game.\n");
         return 1;
     }
 
+    ui_screen__destroy(&screen);
     printf("Thanks for playing!\n");
     return 0;
 }
