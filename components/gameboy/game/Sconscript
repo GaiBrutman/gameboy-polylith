@@ -4,12 +4,11 @@ Import("env")
 
 SConscript('../../../components/gameboy/ui/Sconscript', exports='env')
 
-env.Append(CPPPATH=[Path("include").resolve()])
+env.AppendUnique(CPPPATH=[Path("include").resolve()])
 
 LIBRARY_NAME = "game"
-SOURCES = ["src/game.c"]
 
-env.Library(target=LIBRARY_NAME, source=SOURCES)
+env.Library(target=LIBRARY_NAME, source=["src/game.c"])
 
 # Add the library to the environment
-env.Append(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
+env.AppendUnique(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
