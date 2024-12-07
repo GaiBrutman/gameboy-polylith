@@ -1,0 +1,15 @@
+from pathlib import Path
+
+Import("env")
+
+env.Append(CPPPATH=Path("include").resolve())
+
+LIBRARY_NAME = "simple_game"
+SOURCES = Split("""
+src/game.c
+""")
+
+env.Library(target=LIBRARY_NAME, source=SOURCES)
+
+# Add the library to the environment
+env.Append(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
