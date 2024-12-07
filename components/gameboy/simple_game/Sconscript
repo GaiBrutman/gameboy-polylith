@@ -2,14 +2,13 @@ from pathlib import Path
 
 Import("env")
 
-env.Append(CPPPATH=Path("include").resolve())
+SConscript('../../../components/gameboy/ui/Sconscript', exports='env')
+SConscript('../../../components/gameboy/game/Sconscript', exports='env')
+
+env.AppendUnique(CPPPATH=Path("include").resolve())
 
 LIBRARY_NAME = "simple_game"
-SOURCES = Split("""
-src/game.c
-""")
-
-env.Library(target=LIBRARY_NAME, source=SOURCES)
+env.Library(target=LIBRARY_NAME, source=["src/simple_game.c"])
 
 # Add the library to the environment
-env.Append(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
+env.AppendUnique(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
