@@ -1,0 +1,18 @@
+from pathlib import Path
+
+Import("env")
+env.Append(CPPPATH=[Path("include").resolve()])
+
+env.Append(LINKFLAGS=['-lncurses'])
+
+LIBRARY_NAME = "ui"
+SOURCES = Split("""
+src/screen.c
+src/draw.c
+src/trigger.c
+""")
+
+env.Library(target=LIBRARY_NAME, source=SOURCES)
+
+# Add the library to the environment
+env.Append(LIBS=[LIBRARY_NAME], LIBPATH=[Path.cwd()])
