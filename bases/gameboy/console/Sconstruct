@@ -3,5 +3,6 @@ env = Environment()
 SConscript('../../../components/gameboy/game/Sconscript', exports='env')
 SConscript('../../../components/gameboy/simple_game/Sconscript', exports='env')
 SConscript('../../../components/gameboy/ui/Sconscript', exports='env')
+SConscript('../../../components/gameboy/curses_ui/Sconscript', exports='env')
 
 env.Program(target='gameboy', source=['src/main.c'])
