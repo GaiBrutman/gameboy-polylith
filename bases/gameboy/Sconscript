@@ -1,0 +1,8 @@
+Import("env")
+
+SConscript('../../components/game/Sconscript', exports='env')
+SConscript('../../components/simple_game/Sconscript', exports='env')
+SConscript('../../components/ui/Sconscript', exports='env')
+
+program = env.Program(target='gameboy', source=['src/main.c'])
+Return("program")

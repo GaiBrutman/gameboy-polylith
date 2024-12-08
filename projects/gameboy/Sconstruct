@@ -1,0 +1,15 @@
+env = Environment()
+
+# Components
+SConscript('../../components/game/Sconscript', exports='env')
+SConscript('../../components/simple_game/Sconscript', exports='env')
+SConscript('../../components/ui/Sconscript', exports='env')
+
+# Project specific components
+SConscript('../../components/curses_ui/Sconscript', exports='env')
+
+# Project base
+program = SConscript('../../bases/gameboy/Sconscript', exports='env')
+
+# Make scons aware of the target program
+env.Default(program)

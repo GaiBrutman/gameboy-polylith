@@ -2,7 +2,7 @@ from pathlib import Path
 
 Import("env")
 
-SConscript('../../../components/gameboy/ui/Sconscript', exports='env')
+SConscript('../../components/ui/Sconscript', exports='env')
 
 env.AppendUnique(LINKFLAGS=['-lncurses'])
 
