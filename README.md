@@ -46,3 +46,127 @@ Then run the final product:
 ```sh
 ./bases/gameboy/gameboy
 ```
+
+## Build Sytem
+
+### `projects/gameboy/Sconstruct`
+
+This is the main SCons build script for the `gameboy` project. It sets up the build environment and includes other SConscript files to build the project.
+
+1. **Create Environment**:
+
+    ```py
+    env = Environment()
+    ```
+
+    This line creates a new SCons build environment.
+
+2. **Include Component SConscript Files**:
+
+    ```py
+    SConscript('../../components/game/Sconscript', exports='env')
+    SConscript('../../components/simple_game/Sconscript', exports='env')
+    SConscript('../../components/ui/Sconscript', exports='env')
+    ```
+
+    These lines include the SConscript files for various components. The `exports='env'` argument passes the build environment to these scripts.
+
+3. **Include Project-Specific Component SConscript File**:
+
+    ```py
+    SConscript('../../components/curses_ui/Sconscript', exports='env')
+    ```
+
+    This line includes the SConscript file for the `curses_ui` component.
+
+4. **Include Base SConscript File**:
+
+    ```py
+    program = SConscript('../../bases/gameboy/Sconscript', exports='env')
+    ```
+
+    This line includes the SConscript file for the `gameboy` base and assigns the result to the `program` variable.
+
+5. **Set Default Target**:
+
+    ```py
+    env.Default(program)
+    ```
+
+    This line sets the default target for the build to the `program` defined in the base SConscript file.
+
+### `bases/gameboy/Sconscript`
+
+This SConscript file defines how to build the `gameboy` base.
+
+1. **Import Environment**:
+
+    ```py
+    Import("env")
+    ```
+
+    This line imports the build environment passed from the main `Sconstruct` file.
+
+2. **Include Component SConscript Files**:
+
+    ```py
+    SConscript('../../components/game/Sconscript', exports='env')
+    SConscript('../../components/simple_game/Sconscript', exports='env')
+    SConscript('../../components/ui/Sconscript', exports='env')
+    ```
+
+    These lines include the SConscript files for various components.
+
+3. **Build Program**:
+
+    ```py
+    program = env.Program(target='gameboy', source=['src/main.c'])
+    ```
+
+    This line builds the `gameboy` program from the `src/main.c` source file.
+
+4. **Return Program**:
+
+    ```py
+    Return("program")
+    ```
+
+    This line returns the built program to the calling script.
+
+### Component SConscript Files
+
+Each component has its own SConscript file that defines how to build it. For example, here are the key parts of the `game` component SConscript files:
+
+#### `components/game/Sconscript`
+
+1. **Import Environment**:
+
+    ```py
+    Import("env")
+    ```
+
+2. **Include dependant Components**:
+
+    ```py
+    SConscript('../../components/ui/Sconscript', exports='env')
+    ```
+
+3. **Set Include Path**:
+
+    ```py
+    env.AppendUnique(CPPPATH=[Path("include").resolve()])
+    ```
+
+4. **Build Library**:
+
+    ```py
+    env.Library(target="game", source=["src/game.c"])
+    ```
+
+5. **Add Library to Environment**:
+
+    ```py
+    env.AppendUnique(LIBS=["game"], LIBPATH=[Path.cwd()])
+    ```
+
+These SConscript files define how to build each component and add them to the build environment. The main `Sconstruct` file orchestrates the build process by including these SConscript files and setting up the build environment.
