@@ -2,12 +2,15 @@
 
 #include <stdbool.h>
 
+#define UI_TRIGGER_TIMEOUT (-1)
+
 /**
  * @brief Get an input character.
  *
- * @return The input character.
+ * @param timeout_ms The amount of time to wait for input. 0 means wait indefinitely.
+ * @return The input character, or UI_TRIGGER_TIMEOUT if no input was received.
  */
-char ui_trigger__get_input_char(void);
+char ui_trigger__get_input_char(int timeout_ms);
 
 /**
  * @brief Wait for a trigger.
