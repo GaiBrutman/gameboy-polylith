@@ -28,7 +28,7 @@ bool ui_screen__init(ui_screen_t *screen)
     noecho();
 
     intrflush(stdscr, FALSE);
-    keypad(stdscr, TRUE);
+    keypad(stdscr, FALSE);
 
     clear_screen();
 
