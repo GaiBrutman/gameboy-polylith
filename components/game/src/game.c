@@ -6,11 +6,7 @@
 
 bool game__run(game_t *game, ui_screen_t *screen)
 {
-    if (NULL == game || NULL == screen)
-    {
-        return false;
-    }
-    if (NULL == screen || !screen->is_initialized)
+    if (NULL == game || NULL == screen || !screen->is_initialized)
     {
         return false;
     }
