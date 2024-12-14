@@ -1,4 +1,4 @@
-from pathlib import Path
+# type: ignore
 
 # Create a global build environment
 env = Environment(CCFLAGS='-Wall -Wextra -Werror')

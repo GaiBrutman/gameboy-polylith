@@ -1,3 +1,5 @@
+# type: ignore
+
 Import("env")
 
 SConscript('../../components/game/Sconscript', exports='env')
