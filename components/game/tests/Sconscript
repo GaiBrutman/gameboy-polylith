@@ -1,0 +1,23 @@
+# type: ignore
+
+import subprocess
+
+Import("env")
+
+env.VariantDir('build', '.', duplicate=0)
+
+# Install conan dependencies, unless we're cleaning
+if not GetOption("clean"):
+    # TODO: Replace with conan api when stable
+    subprocess.run(["conan", "install", ".", "--output-folder=build"], shell=False)
+
+    info = env.SConscript('./build/SConscript_conandeps')
+    flags = info["conandeps"]
+    env.MergeFlags(flags)
+
+unit_tests = env.Program("build/test_sanity", ['build/test_sanity.c'])
+
+# Add the build directory to the clean list
+env.Clean(unit_tests, 'build')
+
+Return("unit_tests")

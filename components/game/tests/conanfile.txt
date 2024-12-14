@@ -1,0 +1,5 @@
+[requires]
+unity/2.6.0
+
+[generators]
+SConsDeps
