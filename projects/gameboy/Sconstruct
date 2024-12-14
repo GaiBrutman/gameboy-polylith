@@ -1,3 +1,5 @@
+from pathlib import Path
+
 env = Environment()
 
 # Components
@@ -11,5 +13,5 @@ SConscript('../../components/curses_ui/Sconscript', exports='env')
 # Project base
 program = SConscript('../../bases/gameboy/Sconscript', exports='env')
 
-# Make scons aware of the target program
-env.Default(program)
+# copy the target program to the build directory
+env.Command("build/gameboy", program, Copy("$TARGET", "$SOURCE"))

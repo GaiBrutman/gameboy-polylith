@@ -90,10 +90,11 @@ This is the main SCons build script for the `gameboy` project. It sets up the bu
 5. **Set Default Target**:
 
     ```py
-    env.Default(program)
+    # copy the target program to the build directory
+    env.Command("build/gameboy", program, Copy("$TARGET", "$SOURCE"))
     ```
 
-    This line sets the default target for the build to the `program` defined in the base SConscript file.
+    This line copies the target program to the `build` directory.
 
 ### `bases/gameboy/Sconscript`
 
@@ -120,7 +121,7 @@ This SConscript file defines how to build the `gameboy` base.
 3. **Build Program**:
 
     ```py
-    program = env.Program(target='gameboy', source=['src/main.c'])
+    program = env.Program(target="target.bin", source=['src/main.c'])
     ```
 
     This line builds the `gameboy` program from the `src/main.c` source file.
