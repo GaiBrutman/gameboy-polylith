@@ -1,6 +1,10 @@
 from pathlib import Path
 
+# Create a global build environment
 env = Environment()
+
+# Set a shared sconsign.dblight file
+SConsignFile()
 
 # Components
 SConscript('../../components/game/Sconscript', exports='env')

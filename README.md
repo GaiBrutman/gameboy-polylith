@@ -57,9 +57,10 @@ This is the main SCons build script for the `gameboy` project. It sets up the bu
 
     ```py
     env = Environment()
+    SConsignFile()
     ```
 
-    This line creates a new SCons build environment.
+    This line creates a new SCons build environment and sets up the build cache.
 
 2. **Include Component SConscript Files**:
 
