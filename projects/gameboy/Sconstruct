@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # Create a global build environment
-env = Environment()
+env = Environment(CCFLAGS='-Wall -Wextra -Werror')
 
 # Set a shared sconsign.dblight file
 SConsignFile()
