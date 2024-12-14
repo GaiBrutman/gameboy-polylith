@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <curses.h>
 
-#include "ui/screen.h"
+#include "ui/draw.h"
 
 bool ui_draw__draw_char(ui_screen_t *screen, int x, int y, char c)
 {
